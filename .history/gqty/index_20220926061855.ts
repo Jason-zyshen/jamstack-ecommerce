@@ -12,7 +12,8 @@ import type {
   SchemaObjectTypesNames,
 } from "./schema.generated"
 import { generatedSchema, scalarsEnumsHash } from "./schema.generated"
-
+import dotenv from 'dotenv'
+dotenv.config()
 
 const queryFetcher: QueryFetcher = async function (
   query,
@@ -20,7 +21,7 @@ const queryFetcher: QueryFetcher = async function (
   fetchOptions
 ) {
   // Modify "/api/graphql" if needed
-  const response = await fetch("https://api-us-east-1.hygraph.com/v2/cl8i28whi5f3z01t7h2h6g1i0/master", {
+  const response = await fetch(dotenv.process.GRAPHQL_URL, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

@@ -1,12 +1,14 @@
 /**
  * @type {import("@gqty/cli").GQtyConfig}
  */
+ import dotenv from 'dotenv'
+ dotenv.config()
 
 const config = {
   react: true,
   scalarTypes: { DateTime: "string" },
   introspection: {
-    endpoint: "https://api-us-east-1.hygraph.com/v2/cl8i28whi5f3z01t7h2h6g1i0/master",
+    endpoint: process.env.GRAPHQL_URL,
     headers: {},
   },
   destination: "./gqty/index.ts",

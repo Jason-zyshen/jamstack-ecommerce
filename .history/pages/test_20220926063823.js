@@ -11,7 +11,7 @@ const Test = () => {
     return <p>Loading...</p>;
   }
 
-  return <p>{query.products().map((product) => (product.name))}</p>;
+  return <p>{query.products({limit: 10}).map((product) => (pro.name))}</p>;
 }
 
 export default Test
