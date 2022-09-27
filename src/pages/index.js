@@ -13,9 +13,9 @@ const Home = ({ inventoryData = [], categories: categoryData = [] }) => {
       <CartLink />
       <div className="w-full">
         <Head>
-          <title>Jamstack ECommerce</title>
-          <meta name="description" content="Jamstack ECommerce Next provides a way to quickly get up and running with a fully configurable ECommerce site using Next.js." />
-          <meta property="og:title" content="Jamstack ECommerce" key="title" />
+          <title>BeJewel Design</title>
+          <meta name="description" content="BeJewel Design Next provides a way to quickly get up and running with a fully configurable ECommerce site using Next.js." />
+          <meta property="og:title" content="BeJewel Design" key="title" />
         </Head>
         <div className="bg-blue-300
         p-6 pb-10 smpb-6
@@ -31,7 +31,7 @@ const Home = ({ inventoryData = [], categories: categoryData = [] }) => {
               link={`/product/${slugify(inventory[2].name)}`}
             />
             <Footer
-              designer="Jason Bourne"
+              designer="Jason Shen"
             />
           </div>
           <div className="flex flex-1 justify-center items-center relative">

@@ -10,9 +10,9 @@ function Categories ({ categories = [] }) {
       <div className="w-full">
         <CartLink />
         <Head>
-          <title>Jamstack ECommerce - All Categories</title>
-          <meta name="description" content={`Jamstack ECommerce - All categories`} />
-          <meta property="og:title" content="Jamstack ECommerce - All Categories" key="title" />
+          <title>BeJewel Design - All Categories</title>
+          <meta name="description" content={`BeJewel Design - All categories`} />
+          <meta property="og:title" content="BeJewel Design - All Categories" key="title" />
         </Head>
         <div className="
           pt-4 sm:pt-10 pb-8
