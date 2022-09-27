@@ -1,4 +1,4 @@
-import { Button } from '../';
+import { Button } from '..';
 import { useRouter } from 'next/router'
 
 const Center = ({ price, title, link }) => {
