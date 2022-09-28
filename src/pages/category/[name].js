@@ -61,7 +61,7 @@ export async function getStaticProps ({ params }) {
   const category = params.name.replace(/-/g," ")
   const categories = await fetchCategories()
   const inventory = categories.find(item => slugify(item.name) === slugify(category)).products
-  console.log(inventory)
+  // console.log(inventory)
   return {
     props: {
       inventory,

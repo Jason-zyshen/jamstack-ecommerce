@@ -1,12 +1,14 @@
 import Head from 'next/head'
 import { Center, Footer, Tag, Showcase, DisplaySmall, DisplayMedium } from '../components'
+import DisplayLarge from '../components/heroComponents/DisplayLarge'
 import { titleIfy, slugify } from '../utils/helpers'
-import { fetchInventory } from '../utils/inventoryProvider'
+import fetchCollections from '../utils/collectionProvider'
 import CartLink from '../components/CartLink'
 
-const Home = ({ inventoryData = [], categories: categoryData = [] }) => {
-  const inventory = inventoryData.slice(0, 4)
-  // const categories = categoryData.slice(0, 2)
+const Home = ({ collections = []}) => {
+  const banner = collections.find(item => item.name === 'Banner').products
+  const trending = collections.find(item => item.name === 'Trending').products
+  console.log(trending)
 
   return (
     <>
@@ -17,50 +19,33 @@ const Home = ({ inventoryData = [], categories: categoryData = [] }) => {
           <meta name="description" content="BeJewel Design Next provides a way to quickly get up and running with a fully configurable ECommerce site using Next.js." />
           <meta property="og:title" content="BeJewel Design" key="title" />
         </Head>
-        <div className="bg-blue-300
-        p-6 pb-10 smpb-6
-        flex lg:flex-row flex-col">
-          <div className="pt-4 pl-2 sm:pt-12 sm:pl-12 flex flex-col">
-            <Tag
-              year="2021"
-              category="SOFAS"
-            />
-            <Center
-              price="200"
-              title={inventory[2].name}
-              // link={`/product/${slugify(inventory[2].name)}`}
-            />
-            <Footer
-              designer={inventory[2].createdBy}
-            />
-          </div>
-          <div className="flex flex-1 justify-center items-center relative">
-              <Showcase
-                imageSrc={inventory[2].image}
-              />
-              <div className="absolute
-              w-48 h-48 sm:w-72 sm:h-72 xl:w-88 xl:h-88
-              bg-white z-0 rounded-full" />
-          </div>
-        </div>
+        
+        <DisplayLarge
+          imageSrc={banner[0].images[0].url}
+          title={banner[0].name}
+          link={`/product/${slugify(banner[0].name)}`}
+          price={banner[0].price}
+          category={banner[0].categories[0].name}
+        />
       </div>
       <div className="
         lg:my-8 lg:grid-cols-2
         grid-cols-1
         grid gap-4 my-4 
       ">
-        {/* <DisplayMedium
-          imageSrc={categories[0].image}
-          subtitle={`${categories[0].itemCount} items`}
-          title={titleIfy(categories[0].name)}
-          link={`/category/${slugify(categories[0].name)}`}
-        />
+        {}
         <DisplayMedium
-          imageSrc={categories[1].image}
-          subtitle={`${categories[1].itemCount} items`}
-          title={titleIfy(categories[1].name)}
-          link={`/category/${slugify(categories[1].name)}`}
-        /> */}
+          imageSrc={trending[0].images[0].url}
+          // subtitle={`${categories[0].itemCount} items`}
+          title={titleIfy(trending[0].name)}
+          link={`/category/${slugify(trending[0].name)}`}
+        />
+        {/* // <DisplayMedium
+        //   imageSrc={categories[1].image}
+        //   // subtitle={`${categories[1].itemCount} items`}
+        //   title={titleIfy(categories[1].name)}
+        //   link={`/category/${slugify(categories[1].name)}`}
+        // /> */}
       </div>
       <div className="pt-10 pb-6 flex flex-col items-center">
         <h2 className="text-4xl mb-3">Trending Now</h2>
@@ -100,32 +85,12 @@ const Home = ({ inventoryData = [], categories: categoryData = [] }) => {
 }
 
 export async function getStaticProps() {
-  const inventory = await fetchInventory()
-  // console.log(inventory)
-  // const inventoryCategorized = inventory.reduce((acc, next) => {
-  //   const categories = next.categories
-  //   categories.forEach(c => {
-  //     const index = acc.findIndex(item => item.name === c)
-  //     if (index !== -1) {
-  //       const item = acc[index]
-  //       item.itemCount = item.itemCount + 1
-  //       acc[index] = item
-  //     } else {
-  //       const item = {
-  //         name: c,
-  //         image: next.image,
-  //         itemCount: 1
-  //       }
-  //       acc.push(item)
-  //     }
-  //   })
-  //   return acc
-  // }, [])
+  const collections = await fetchCollections()
+  // console.log(collections)
   
   return {
     props: {
-      inventoryData: inventory,
-      // categories: inventoryCategorized
+      collections: collections,
     }
   }
 }
