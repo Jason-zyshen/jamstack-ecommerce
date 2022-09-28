@@ -2,7 +2,8 @@ import Head from 'next/head'
 import { titleIfy , slugify } from '../utils/helpers'
 import { DisplayMedium } from '../components'
 import CartLink from '../components/CartLink'
-import { fetchInventory } from '../utils/inventoryProvider'
+import fetchCategories from '../utils/categoryProvider'
+
 
 function Categories ({ categories = [] }) {
   return (
@@ -28,8 +29,8 @@ function Categories ({ categories = [] }) {
             categories.map((category, index) => (
               <DisplayMedium
                 key={index}
-                imageSrc={category.image}
-                subtitle={`${category.itemCount} items`}
+                // imageSrc={category.image}
+                // subtitle={`${category.itemCount} items`}
                 title={titleIfy(category.name)}
                 link={`/category/${slugify(category.name)}`}
               />
@@ -43,30 +44,34 @@ function Categories ({ categories = [] }) {
 }
 
 export async function getStaticProps() {
-  const inventory = await fetchInventory()
-  const inventoryCategories = inventory.reduce((acc, next) => {
-    const categories = next.categories
-    categories.forEach(c => {
-      const index = acc.findIndex(item => item.name === c)
-      if (index !== -1) {
-        const item = acc[index]
-        item.itemCount = item.itemCount + 1
-        acc[index] = item
-      } else {
-        const item = {
-          name: c,
-          image: next.image,
-          itemCount: 1
-        }
-        acc.push(item)
-      }
-    })
-    return acc
-  }, [])
+  const categories = await fetchCategories()
+
+  console.log(categories)
+
+
+  // const inventoryCategories = inventory.reduce((acc, next) => {
+  //   const categories = next.categories
+  //   categories.forEach(c => {
+  //     const index = acc.findIndex(item => item.name === c)
+  //     if (index !== -1) {
+  //       const item = acc[index]
+  //       item.itemCount = item.itemCount + 1
+  //       acc[index] = item
+  //     } else {
+  //       const item = {
+  //         name: c,
+  //         image: next.image,
+  //         itemCount: 1
+  //       }
+  //       acc.push(item)
+  //     }
+  //   })
+  //   return acc
+  // }, [])
 
   return {
     props: {
-      categories: inventoryCategories
+      categories: categories
     }
   }
 }

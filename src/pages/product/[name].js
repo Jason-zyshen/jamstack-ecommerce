@@ -8,10 +8,11 @@ import { slugify } from '../../utils/helpers'
 import CartLink from '../../components/CartLink'
 import { SiteContext, ContextProviderComponent } from '../../context/mainContext'
 
+
 const ItemView = (props) => {
   const [numberOfitems, updateNumberOfItems] = useState(1)
   const { product } = props
-  const { price, image, name, description } = product
+  const { price, images, name, description } = product
   const { context: { addToCart }} = props
 
   function addItemToCart (product) {
@@ -43,13 +44,11 @@ const ItemView = (props) => {
       ">
         <div className="w-full md:w-1/2 h-120 flex flex-1 bg-light hover:bg-light-200">
           <div className="py-16 p10 flex flex-1 justify-center items-center">
-            <Image src={image} alt="Inventory item" className="max-h-full" />
+            {images.map((image) => (<Image src={image.url} alt="Inventory item" className="max-h-full" />))}
           </div>
         </div>
         <div className="pt-2 px-0 md:px-10 pb-8 w-full md:w-1/2">
-          <h1 className="
-           sm:mt-0 mt-2 text-5xl font-light leading-large
-          ">{name}</h1>
+          <h1 className="sm:mt-0 mt-2 text-5xl font-light leading-large">{name}</h1>
           <h2 className="text-2xl tracking-wide sm:py-8 py-6">${price}</h2>
           <p className="text-gray-600 leading-7">{description}</p>
           <div className="my-6">
@@ -72,9 +71,12 @@ const ItemView = (props) => {
 
 export async function getStaticPaths () {
   const inventory = await fetchInventory()
+  // console.log(inventory)
+
   const paths = inventory.map(item => {
     return { params: { name: slugify(item.name) }}
   })
+
   return {
     paths,
     fallback: false

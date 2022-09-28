@@ -1,4 +1,7 @@
-import inventory from './inventory'
+import { gql } from "@apollo/client";
+import client from "../lib/apollo-client"
+
+
 
 /*
 Inventory items should adhere to the following schema:
@@ -15,11 +18,32 @@ type Product {
 }
 */
 
-async function fetchInventory() {
-  // const inventory = API.get(apiUrl)
+async function fetchInventory () {
+  const { data } = await client.query({
+    query: gql`
+      query Products {
+        products {
+          name
+          price
+          description
+          images {
+            url
+          }
+          categories{
+            name
+          }
+          createdBy {
+            name
+          }
+        }
+      }
+    `,
+  })
+  const inventory = data.products
+
   return Promise.resolve(inventory)
 }
 
 export {
-  fetchInventory, inventory as staticInventory
+  fetchInventory //, inventory as staticInventory
 }

@@ -46,6 +46,7 @@ const Category = (props) => {
 
 export async function getStaticPaths () {
   const categories = await fetchCategories()
+  console.log(categories)
   const paths = categories.map(category => {
     return { params: { name: slugify(category) }}
   })
