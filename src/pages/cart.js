@@ -34,7 +34,7 @@ const Cart = ({ context }) => {
 
   return (
     <>
-      <CartLink />
+      {/* <CartLink /> */}
       <div className="flex flex-col items-center pb-10">
         <Head>
           <title>BeJewel Design - Cart</title>

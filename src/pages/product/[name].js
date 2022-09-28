@@ -31,7 +31,7 @@ const ItemView = (props) => {
 
   return (
     <>
-      <CartLink />
+      {/* <CartLink /> */}
       <Head>
         <title>BeJewel Design - {name}</title>
         <meta name="description" content={description} />

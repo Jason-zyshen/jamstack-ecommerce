@@ -9,7 +9,7 @@ const Category = (props) => {
   const { inventory, title } = props
   return (
     <>
-      <CartLink />
+      {/* <CartLink /> */}
       <Head>
         <title>BeJewel Design - {title}</title>
         <meta name="description" content={`BeJewel Design - ${title}`} />

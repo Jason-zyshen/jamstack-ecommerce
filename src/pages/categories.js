@@ -9,7 +9,7 @@ function Categories ({ categories = [] }) {
   return (
     <>
       <div className="w-full">
-        <CartLink />
+        {/* <CartLink /> */}
         <Head>
           <title>BeJewel Design - All Categories</title>
           <meta name="description" content={`BeJewel Design - All categories`} />

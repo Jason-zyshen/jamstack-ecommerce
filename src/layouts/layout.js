@@ -3,6 +3,8 @@ import { slugify } from '../utils/helpers'
 import 'react-toastify/dist/ReactToastify.css'
 import { ToastContainer } from 'react-toastify'
 import { navItemLength } from '../ecommerce.config'
+import CartLink from '../components/CartLink'
+
 
 export default function Layout({ children, categories }) {
   if (categories.length > navItemLength) {
@@ -62,6 +64,7 @@ export default function Layout({ children, categories }) {
                 </a>
               </Link>
             </div>
+            <CartLink />
           </div>
         </div>
       </nav>
