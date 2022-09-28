@@ -31,7 +31,7 @@ const Category = (props) => {
                       link={`/product/${slugify(item.name)}`}
                       title={item.name}
                       price={item.price}
-                      imageSrc={item.image}
+                      imageSrc={item.images[0].url}
                     />
                   )
                 })
@@ -46,9 +46,9 @@ const Category = (props) => {
 
 export async function getStaticPaths () {
   const categories = await fetchCategories()
-  console.log(categories)
+  // console.log(categories)
   const paths = categories.map(category => {
-    return { params: { name: slugify(category) }}
+    return { params: { name: slugify(category.name) }}
   })
   return {
     paths,
@@ -57,8 +57,11 @@ export async function getStaticPaths () {
 }
 
 export async function getStaticProps ({ params }) {
+  // console.log(params.name)
   const category = params.name.replace(/-/g," ")
-  const inventory = await inventoryForCategory(category)
+  const categories = await fetchCategories()
+  const inventory = categories.find(item => slugify(item.name) === slugify(category)).products
+  console.log(inventory)
   return {
     props: {
       inventory,

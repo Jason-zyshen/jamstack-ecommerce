@@ -7,9 +7,13 @@ async function fetchCategories() {
       query Categories {
         categories {
           name
-          # products {
-          #   name
-          # }
+          products {
+            name
+            price
+            images {
+              url
+            }
+          }
         }
       }
     `,

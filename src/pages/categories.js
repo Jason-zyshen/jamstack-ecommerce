@@ -29,7 +29,7 @@ function Categories ({ categories = [] }) {
             categories.map((category, index) => (
               <DisplayMedium
                 key={index}
-                // imageSrc={category.image}
+                imageSrc={category.products[0].images[0].url}
                 // subtitle={`${category.itemCount} items`}
                 title={titleIfy(category.name)}
                 link={`/category/${slugify(category.name)}`}
@@ -37,6 +37,7 @@ function Categories ({ categories = [] }) {
             ))
           }
           </div>
+          {/* </div> */}
         </div>
       </div>
     </>
@@ -45,30 +46,7 @@ function Categories ({ categories = [] }) {
 
 export async function getStaticProps() {
   const categories = await fetchCategories()
-
-  console.log(categories)
-
-
-  // const inventoryCategories = inventory.reduce((acc, next) => {
-  //   const categories = next.categories
-  //   categories.forEach(c => {
-  //     const index = acc.findIndex(item => item.name === c)
-  //     if (index !== -1) {
-  //       const item = acc[index]
-  //       item.itemCount = item.itemCount + 1
-  //       acc[index] = item
-  //     } else {
-  //       const item = {
-  //         name: c,
-  //         image: next.image,
-  //         itemCount: 1
-  //       }
-  //       acc.push(item)
-  //     }
-  //   })
-  //   return acc
-  // }, [])
-
+  // console.log(categories)
   return {
     props: {
       categories: categories
