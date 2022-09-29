@@ -7,7 +7,7 @@ async function fetchCollections() {
       query Collections {
         collections {
           name
-          products {
+          products(where: {onShelf: true}) {
             name
             price
             images {

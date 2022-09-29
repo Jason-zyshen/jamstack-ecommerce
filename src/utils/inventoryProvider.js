@@ -22,7 +22,7 @@ async function fetchInventory () {
   const { data } = await client.query({
     query: gql`
       query Products {
-        products {
+        products(where: {onShelf: true}) {
           name
           price
           description
@@ -45,5 +45,5 @@ async function fetchInventory () {
 }
 
 export {
-  fetchInventory //, inventory as staticInventory
+  fetchInventory
 }

@@ -7,7 +7,7 @@ async function fetchCategories() {
       query Categories {
         categories {
           name
-          products {
+          products(where: {onShelf: true}) {
             name
             price
             images {
