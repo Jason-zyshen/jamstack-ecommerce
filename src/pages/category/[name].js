@@ -66,7 +66,8 @@ export async function getStaticProps ({ params }) {
     props: {
       inventory,
       title: category
-    }
+    },
+    revalidate: 10
   }
 }
 
