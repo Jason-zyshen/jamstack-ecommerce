@@ -1,6 +1,5 @@
 import Head from 'next/head'
-import { DisplaySmall, DisplayMedium } from '../components'
-import DisplayLarge from '../components/heroComponents/DisplayLarge'
+import { DisplaySmall, DisplayMedium, DisplayLarge } from '../components'
 import { titleIfy, slugify } from '../utils/helpers'
 import fetchCollections from '../utils/collectionProvider'
 import CartLink from '../components/CartLink'
