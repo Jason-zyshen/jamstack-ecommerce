@@ -1,9 +1,25 @@
-import { HYGRAPH_URL, HYGRAPH_PERMANENTAUTH_TOKEN } from './constants.js';
-import { ApolloClient, InMemoryCache } from "@apollo/client";
+import { ApolloClient, createHttpLink, InMemoryCache } from '@apollo/client';
+import { setContext } from '@apollo/client/link/context';
+
+console.log(process.env.GRAPHQL_URL)
+
+const httpLink = createHttpLink({
+  uri: process.env.GRAPHQL_URL,
+});
+
+const authLink = setContext((_, { headers }) => {
+  const token = process.env.AUTHENCICATION_TOKEN
+  return {
+    headers: {
+      ...headers,
+      authorization: token ? `Bearer ${token}` : "",
+    }
+  }
+});
 
 const client = new ApolloClient({
-    uri: HYGRAPH_URL,
-    cache: new InMemoryCache(),
+  link: authLink.concat(httpLink),
+  cache: new InMemoryCache()
 });
 
 export default client;
