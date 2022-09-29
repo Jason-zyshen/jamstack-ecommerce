@@ -15,7 +15,7 @@ Since the backend has not finished yet, I'm going to use a [GraphCMS](https://ap
 - [ ] slide gallery
 
 **Deployment**
-- [ ] remove environment variables
+- [x] remove environment variables
 
 **API functions**
 - [ ] API merge
