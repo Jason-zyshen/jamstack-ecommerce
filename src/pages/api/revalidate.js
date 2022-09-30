@@ -1,5 +1,4 @@
-import { getStaticPaths as getCategoriesPaths } from '../category/[name]'
-// import { getStaticPaths as getProductsPaths } from '../product'
+// Use host + /api/revalidate?secret=&path= to manually re-generate single page.
 
 export default async function handler(req, res) {
     if (req.query.secret !== process.env.REVALIDATE_TOKEN) {
@@ -7,15 +6,9 @@ export default async function handler(req, res) {
     }
 
     try {
-      const categoriesPaths = await getCategoriesPaths()
-      const revalidateCategoriesPaths = categoriesPaths.map((path) =>
-          res.unstable_revalidate(`/category/${path.params.slug}`)
-      );
-
-      // run revalidation in parallel
-      await Promise.all([res.unstable_revalidate('/category/'), ...revalidateCategoriesPaths]);
-
-      // await res.revalidate('/category/t-shirt')
+      const path = req.query.path
+      console.log('revalidate: ' + path)
+      await res.revalidate(path)
       return res.json({ revalidated: true })
     } catch (err) {
       // If there was an error, Next.js will continue
